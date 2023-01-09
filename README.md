@@ -1,2 +1,2 @@
 # xmy-dot.github.io
-xmy
+xmy-dot.github.io

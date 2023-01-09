@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>star背景</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body,
+      .background {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #faf8f1;
+      }
+      @keyframes star-move {
+        from {
+          transform: translateY(100vh) scale(0);
+        }
+        to {
+          transform: translateY(-100vh) scale(1);
+        }
+      }
+      .background {
+        position: absolute;
+        overflow: hidden;
+      }
+      .star {
+        /* position: absolute; */
+        display: inline-block;
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem rgb(178, 175, 255));
+        animation: star-move 5s linear infinite;
+        animation-duration: calc(300s / var(--speed));
+      }
+      .star div {
+        display: inline-block;
+        background-color: #b1afff;
+        width: 8vmin;
+        height: 8vmin;
+        clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        );
+        opacity: 0.5;
+      }
+      .star.green {
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem #8ec3b0);
+      }
+      .star.green div {
+        background-color: #8ec3b0;
+      }
+      .star.yellow {
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem #c58940);
+      }
+      .star.yellow div {
+        background-color: #c58940;
+      }
+      .star.pink {
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem #fb2576);
+      }
+      .star.pink div {
+        background-color: #fb2576;
+      }
+      section {
+        width: 70vmin;
+        height: 70vmin;
+        border: #b1afff 10px solid;
+        background-color: rgb(217, 255, 210);
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+    <section></section>
+
+    <script>
+      window.onload = function () {
+        star();
+      };
+      window.onresize = function () {
+        star();
+      };
+      function star() {
+        const pageWidth = getClint();
+        const starNum = getStarNum(pageWidth);
+        const backGround = document.getElementsByClassName('background')[0];
+        if (backGround.hasChildNodes) {
+          backGround.innerHTML = '';
+        }
+        for (let index = 0; index < starNum; index++) {
+          const star = document.createElement('div');
+          const starDiv = document.createElement('div');
+          star.style.cssText = `--speed:` + (Math.random() * 50 + 10);
+          star.classList = 'star';
+          if (parseInt(Math.random() * 10) % 2) {
+            if (parseInt(Math.random() * 10) % 2) {
+              star.classList += '';
+            } else {
+              star.classList += ' green';
+            }
+          } else {
+            if (parseInt(Math.random() * 10) % 2) {
+              star.classList += ' yellow';
+            } else {
+              star.classList += ' pink';
+            }
+          }
+          star.appendChild(starDiv);
+          backGround.appendChild(star);
+        }
+      }
+      function getClint() {
+        return (width =
+          window.innerWidth ||
+          document.documentElement.clientWidth ||
+          document.body.clientWidth);
+      }
+      function getStarNum(width) {
+        if (width >= 1500) {
+          return 100;
+        } else if (width >= 1000 && width < 1500) {
+          return 75;
+        } else if (width >= 500 && width < 1000) {
+          return 50;
+        } else {
+          return 25;
+        }
+      }
+    </script>
+  </body>
+</html>

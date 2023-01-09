@@ -1,0 +1,57 @@
+body {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #263159;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  width: 30vmin;
+  height: 30vmin;
+}
+.main:hover {
+  transform-style: preserve-3d;
+  animation: trans 5s linear infinite;
+}
+.card {
+  width: 30vmin;
+  height: 30vmin;
+  position: absolute;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  line-height: 30vmin;
+  text-align: center;
+  font-size: 8vmin;
+}
+.card:nth-child(1) {
+  background-color: hsla(52, 100%, 87%, 0.7);
+}
+.card:nth-child(2) {
+  background-color: hsla(109, 51%, 85%, 0.7);
+  transform: rotateY(180deg);
+}
+@keyframes trans {
+  0% {
+    transform: rotateY(0deg);
+  }
+  25% {
+    transform: rotateY(180deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+  75% {
+    transform: rotateY(-180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+canvas {
+  position: absolute;
+  z-index: -1;
+}
